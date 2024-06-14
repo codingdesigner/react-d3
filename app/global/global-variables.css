@@ -1,0 +1,165 @@
+:root {
+  /* Color */
+  color-scheme: light dark;
+
+  --color-accent-1: light-dark(rgb(163, 207, 239), rgb(109, 138, 160));
+  --color-accent-2: light-dark(rgb(182, 220, 66), rgb(123, 150, 44));
+  --color-accent-3: light-dark(rgb(241, 193, 146), rgb(213, 156, 98));
+  --color-accent-4: light-dark(rgb(227, 183, 213), rgb(154, 110, 140));
+  --color-accent-5: light-dark(rgb(253, 210, 217), rgb(194, 134, 144));
+  --color-accent-6: light-dark(rgb(255, 229, 180), rgb(201, 166, 101));
+  --color-accent-7: light-dark(rgb(158, 255, 250), rgb(88, 199, 194));
+  --color-accent-8: light-dark(rgb(191, 94, 162), rgb(148, 61, 122));
+  --color-accent-8b: light-dark(rgb(191, 94, 162), rgb(227, 132, 199));
+  --color-accent-9: light-dark(rgb(83, 183, 152), rgb(48, 136, 108));
+
+  --color-accent-strong-5: light-dark(rgb(220, 91, 113), rgb(250, 163, 177));
+
+  --color-feedback-link: light-dark(rgba(0, 127, 173, 1), rgb(27, 194, 255));
+  --color-feedback-link_hover: light-dark(rgba(8, 96, 128, 1), rgb(88, 169, 198));
+
+  --color-grayscale-black: rgba(0, 0, 0, 1);
+  --color-grayscale-gray1: rgba(51, 51, 51, 1);
+  --color-grayscale-gray2: rgba(102, 102, 102, 1);
+  --color-grayscale-gray3: rgba(153, 153, 153, 1);
+  --color-grayscale-gray4: rgba(186, 186, 186, 1);
+  --color-grayscale-gray5: rgba(222, 222, 222, 1);
+  --color-grayscale-gray6: rgba(247, 247, 247, 1);
+  --color-grayscale-white: rgba(255, 255, 255, 1);
+
+  --main-bg-color: light-dark(
+    var(--color-grayscale-white),
+    var(--color-grayscale-gray1)
+  );
+  --main-text-color: light-dark(
+    var(--color-grayscale-gray1),
+    var(--color-grayscale-white)
+  );
+
+  --test-grid-color: rgba(0, 213, 255, 0.2);
+
+  /* only Safari needs this */
+  @supports not (color: light-dark(red, pink)) {
+    --color-accent-1: rgb(163, 207, 239);
+    --color-accent-2: rgb(182, 220, 66);
+    --color-accent-3: rgb(241, 193, 146);
+    --color-accent-4: rgb(227, 183, 213);
+    --color-accent-5: rgb(253, 210, 217);
+    --color-accent-6: rgb(255, 229, 180);
+    --color-accent-7: rgb(158, 255, 250);
+    --color-accent-8: rgb(191, 94, 162);
+    --color-accent-8b: rgb(191, 94, 162);
+    --color-accent-9: rgb(83, 183, 152);
+    --main-bg-color: var(--color-grayscale-white);
+    --main-text-color: var(--color-grayscale-gray1);
+    --color-feedback-link: rgba(0, 127, 173, 1);
+    --color-feedback-link_hover: rgba(8, 96, 128, 1);
+    @media (prefers-color-scheme: dark) {
+      --color-accent-1: rgb(109, 138, 160);
+      --color-accent-2: rgb(123, 150, 44);
+      --color-accent-3: rgb(213, 156, 98);
+      --color-accent-4: rgb(154, 110, 140);
+      --color-accent-5: rgb(194, 134, 144);
+      --color-accent-6: rgb(201, 166, 101);
+      --color-accent-7: rgb(88, 199, 194);
+      --color-accent-8: rgb(148, 61, 122);
+      --color-accent-8b: rgb(227, 132, 199);
+      --color-accent-9: rgb(48, 136, 108);
+      --main-bg-color: var(--color-grayscale-gray1);
+      --main-text-color: var(--color-grayscale-white);
+      --color-feedback-link: rgb(27, 194, 255);
+      --color-feedback-link_hover: rgb(88, 169, 198);
+    }
+  }
+
+  /* Typography */
+  --type-text-font-family: "gill-sans-nova", Verdana, Arial, -apple-system,
+    sans-serif;
+  --type-text-font-optical-sizing: auto;
+  --type-text-font-base-weight: 400;
+  --type-text-font-style: normal;
+
+  --type-display-font-family: "gill-sans-nova-shadowed-outl", Verdana, Arial,
+    -apple-system, sans-serif;
+  --type-display-font-base-weight: 400;
+  --type-display-font-style: normal;
+  --type-display-font-variation-settings: "liga", "salt";
+
+  --type-display2-font-family: "gill-sans-nova-condensed", Verdana, Arial,
+    -apple-system, sans-serif;
+  --type-display2-font-base-weight: 500;
+  --type-display2-font-style: normal;
+  --type-display2-font-variation-settings: "liga";
+
+  --type-mono: "source-code-pro", monospace;
+  --type-mono-font-base-weight: 400;
+  --type-mono-font-style: normal;
+
+  /* Spacing */
+  --spacing-0-5: 4px;
+  --spacing-baseline: 8px;
+  --spacing-1-5: 12px;
+  --spacing-2: 16px;
+  --spacing-2-5: 20px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-5: 40px;
+  --spacing-6: 48px;
+  --spacing-7: 56px;
+  --spacing-8: 64px;
+  --spacing-9: 72px;
+  --spacing-10: 80px;
+  --spacing-11: 88px;
+  --spacing-12: 96px;
+
+  /* Type Scale */
+  --type-scale-seed: var(--spacing-2);
+  --type-scale-multiplier: 1.2;
+  --type-scale-1: var(--type-scale-seed);
+  --type-scale-2: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 1)
+  );
+  --type-scale-3: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 2)
+  );
+  --type-scale-4: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 3)
+  );
+  --type-scale-5: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 4)
+  );
+  --type-scale-6: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 5)
+  );
+  --type-scale-7: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 6)
+  );
+  --type-scale-8: calc(
+    var(--type-scale-seed) * pow(var(--type-scale-multiplier), 7)
+  );
+  --line-height-1: var(--spacing-3);
+  --line-height-2: var(--spacing-3);
+  --line-height-3: var(--spacing-4);
+  --line-height-4: var(--spacing-4);
+  --line-height-5: var(--spacing-4);
+  --line-height-6: var(--spacing-5);
+  --line-height-7: var(--spacing-7);
+
+  --line-measure: 28em;
+
+  /* Layout */
+  --layout-gap: var(--spacing-2);
+  --layout-gap-wide: var(--spacing-6);
+  --nav-bar-padding: var(--spacing-1-5);
+  --border-width: 1px;
+
+  /* Baseline */
+  --baseline-grid: 8px;
+  --baseline-grid-background: 7px;
+  --baseline-bg-image: repeating-linear-gradient(
+    180deg,
+    var(--main-bg-color) 0,
+    var(--main-bg-color) var(--baseline-grid-background),
+    var(--test-grid-color) var(--baseline-grid)
+  );
+}

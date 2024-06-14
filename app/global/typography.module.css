@@ -1,0 +1,15 @@
+.typeDisplay {
+  font-family: var(--type-display-font-family);
+  font-optical-sizing: var(--type-display-font-optical-sizing);
+  font-weight: var(--type-display-font-base-weight);
+  font-style: var(--type-display-font-style);
+  font-variation-settings: var(--type-display-font-variation-settings);
+}
+
+.typeBasic {
+  font-family: var(--type-text-font-family);
+  font-optical-sizing: var(--type-text-font-optical-sizing);
+  font-weight: var(--type-text-font-base-weight);
+  font-style: var(--type-text-font-style);
+  font-variation-settings: var(--type-text-font-variation-settings);
+}
