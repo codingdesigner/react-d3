@@ -7,7 +7,7 @@ export function Menu() {
     <ul className={styles.Menu}>
       <li><a href='/'>Home</a></li>
       <li><a href='/pages/bar-chart'>Bar Chart</a></li>
-      <li><a href='/pages/line-chart'>Line Chart</a></li>
+      <li><a href='/pages/line-plot'>Line Plot</a></li>
     </ul>
   );
 }
