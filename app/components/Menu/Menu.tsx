@@ -1,12 +1,8 @@
 import React from 'react';
 
-import styles from './Menu.css';
+import styles from './Menu.module.css';
 
-export interface MenuProps {
-  prop?: string;
-}
-
-export function Menu({ prop = 'default value' }: MenuProps) {
+export function Menu() {
   return (
     <ul className={styles.Menu}>
       <li><a href='/'>Home</a></li>
