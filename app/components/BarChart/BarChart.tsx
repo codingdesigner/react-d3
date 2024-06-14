@@ -7,8 +7,8 @@ export interface BarChartProps {
   prop?: string;
 }
 
-export function BarChart({prop = 'default value'}: BarChartProps) {
-  const ref = useRef();
+export function BarChart({ prop = 'default value' }: BarChartProps) {
+  const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     // set the dimensions and margins of the graph
@@ -29,6 +29,11 @@ export function BarChart({prop = 'default value'}: BarChartProps) {
     d3.csv(
       "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"
     ).then(function (data) {
+        // Ensure data is correctly typed
+        data.forEach(d => {
+          d.Value = +d.Value; // Convert Value to number
+        });
+
       // X axis
       const x = d3
         .scaleBand()
@@ -52,7 +57,7 @@ export function BarChart({prop = 'default value'}: BarChartProps) {
         .selectAll("mybar")
         .data(data)
         .join("rect")
-        .attr("x", (d) => x(d.Country))
+          .attr("x", (d) => x(d.Country)!)
         .attr("y", (d) => y(d.Value))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.Value))
