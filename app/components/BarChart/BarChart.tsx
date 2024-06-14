@@ -61,7 +61,7 @@ export function BarChart({ prop = 'default value' }: BarChartProps) {
         .attr("y", (d) => y(d.Value))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.Value))
-        .attr("fill", "#5f0f40");
+        .attr("fill", "var(--color-accent-5)");
     });
   }, []);
 
