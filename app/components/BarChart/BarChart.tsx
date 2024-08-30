@@ -7,16 +7,24 @@ export interface BarChartProps {
   prop?: string;
 }
 
-export function BarChart({ prop = 'default value' }: BarChartProps) {
+/**
+ * BarChart component renders a bar chart using D3.js in a React component.
+ *
+ * @param {BarChartProps} props - Props object for the component.
+ * @param {string} [props.prop='default value'] - An optional string property with a default value.
+ *
+ * @returns {JSX.Element} A React component rendering an SVG bar chart.
+ */
+export function BarChart({ prop = 'default value' }: BarChartProps): JSX.Element {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
-    // set the dimensions and margins of the graph
+    // Set the dimensions and margins of the graph
     const margin = { top: 30, right: 30, bottom: 70, left: 60 },
       width = 460 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
+    // Append the SVG object to the div referenced by ref
     const svg = d3
       .select(ref.current)
       .append("svg")
@@ -25,19 +33,21 @@ export function BarChart({ prop = 'default value' }: BarChartProps) {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Parse the Data
+    // Parse the data from a CSV file and create the BarChart
     d3.csv(
       "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"
     ).then(function (data) {
       // Ensure data is correctly typed
       data.forEach(d => {
+        // @ts-ignore
         d.Value = +d.Value; // Convert Value to number
       });
 
-      // X axis
+      // X axis setup
       const x = d3
         .scaleBand()
         .range([0, width])
+        // @ts-ignore
         .domain(data.map((d) => d.Country))
         .padding(0.2);
       svg
@@ -48,20 +58,26 @@ export function BarChart({ prop = 'default value' }: BarChartProps) {
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
 
-      // Add Y axis
+      // Y axis setup
       const y = d3.scaleLinear().domain([0, 13000]).range([height, 0]);
       svg.append("g").call(d3.axisLeft(y));
 
       // Bars
       svg
         .selectAll("mybar")
+        // @ts-ignore
         .data(data)
         .join("rect")
         .attr("x", (d) => x(d.Country)!)
+        // @ts-ignore
         .attr("y", (d) => y(d.Value))
         .attr("width", x.bandwidth())
+        // @ts-ignore
         .attr("height", (d) => height - y(d.Value))
-        .attr("fill", "var(--color-accent-5)");
+        .attr("fill", "var(--color-accent-5)")
+        .style("stroke", "var(--color-accent-1)")
+        .style("stroke-width", "3px")
+        ;
     });
   }, []);
 
