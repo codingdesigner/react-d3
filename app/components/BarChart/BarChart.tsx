@@ -1,10 +1,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
-
-import * as data from './data/countries.json'
-
-import styles from './BarChart.module.css';
+import data from './data/countries.json' // Fix import to match default export of JSON file
+import styles from './BarChart.module.css'; // Import CSS module
 
 export interface BarChartProps {
   prop?: string;
@@ -22,6 +20,9 @@ export function BarChart({ prop = 'default value' }: BarChartProps): JSX.Element
   const ref = useRef<SVGSVGElement | null>(null); // Create a ref to attach to the SVG element
 
   useEffect(() => {
+    // Clear the SVG before drawing
+    d3.select(ref.current).selectChildren().remove();
+
     // Set the dimensions and margins of the graph
     const margin = { top: 30, right: 30, bottom: 70, left: 60 },
           width = 460 - margin.left - margin.right, // Actual width of the graph
@@ -37,8 +38,7 @@ export function BarChart({ prop = 'default value' }: BarChartProps): JSX.Element
       .attr("transform", `translate(${margin.left},${margin.top})`); // Move the group element to respect the margins
 
     // Ensure data is correctly typed
-    data.forEach((d: { Value: number; }) => {
-      // @ts-ignore
+    (data as Array<{ Country: string, Value: number }>).forEach((d) => {
       d.Value = +d.Value; // Convert the `Value` property to a number
     });
 
@@ -60,14 +60,14 @@ export function BarChart({ prop = 'default value' }: BarChartProps): JSX.Element
       .style("text-anchor", "end"); // Align the end of the text with the ticks
 
     // Y axis setup with scaling
-    const y = d3.scaleLinear().domain([0, 13000]).range([height, 0]); // Create a linear scale for the y-axis
+    const y = d3.scaleLinear().domain([0, Math.max(...data.map(d => d.Value))]).range([height, 0]); // Create a linear scale for the y-axis with a dynamic domain
 
     // Append Y axis to the SVG and set its orientation
     svg.append("g").call(d3.axisLeft(y)); // Create the Y-axis with the defined scale
 
     // Create and append the bars
     svg
-      .selectAll("mybar") // Create a selection for the bars
+      .selectAll("rect") // Create a selection for the bars
       // @ts-ignore
       .data(data) // Bind data to the selection
       .join("rect") // Join the data to the rect elements
