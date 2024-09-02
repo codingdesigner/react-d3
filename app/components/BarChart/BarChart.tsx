@@ -1,5 +1,8 @@
+
 import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
+
+import * as data from './data/countries.json'
 
 import styles from './BarChart.module.css';
 
@@ -33,52 +36,47 @@ export function BarChart({ prop = 'default value' }: BarChartProps): JSX.Element
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Parse the data from a CSV file and create the BarChart
-    d3.csv(
-      "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"
-    ).then(function (data) {
-      // Ensure data is correctly typed
-      data.forEach(d => {
-        // @ts-ignore
-        d.Value = +d.Value; // Convert Value to number
-      });
-
-      // X axis setup
-      const x = d3
-        .scaleBand()
-        .range([0, width])
-        // @ts-ignore
-        .domain(data.map((d) => d.Country))
-        .padding(0.2);
-      svg
-        .append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
-
-      // Y axis setup
-      const y = d3.scaleLinear().domain([0, 13000]).range([height, 0]);
-      svg.append("g").call(d3.axisLeft(y));
-
-      // Bars
-      svg
-        .selectAll("mybar")
-        // @ts-ignore
-        .data(data)
-        .join("rect")
-        .attr("x", (d) => x(d.Country)!)
-        // @ts-ignore
-        .attr("y", (d) => y(d.Value))
-        .attr("width", x.bandwidth())
-        // @ts-ignore
-        .attr("height", (d) => height - y(d.Value))
-        .attr("fill", "var(--color-accent-5)")
-        .style("stroke", "var(--color-accent-1)")
-        .style("stroke-width", "3px")
-        ;
+    // Ensure data is correctly typed
+    data.forEach((d: { Value: number; }) => {
+      // @ts-ignore
+      d.Value = +d.Value; // Convert Value to number
     });
+
+    // X axis setup
+    const x = d3
+      .scaleBand()
+      .range([0, width])
+      // @ts-ignore
+      .domain(data.map((d) => d.Country))
+      .padding(0.2);
+    svg
+      .append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end");
+
+    // Y axis setup
+    const y = d3.scaleLinear().domain([0, 13000]).range([height, 0]);
+    svg.append("g").call(d3.axisLeft(y));
+
+    // Bars
+    svg
+      .selectAll("mybar")
+      // @ts-ignore
+      .data(data)
+      .join("rect")
+      .attr("x", (d) => x(d.Country)!)
+      // @ts-ignore
+      .attr("y", (d) => y(d.Value))
+      .attr("width", x.bandwidth())
+      // @ts-ignore
+      .attr("height", (d) => height - y(d.Value))
+      .attr("fill", "var(--color-accent-5)")
+      .style("stroke", "var(--color-accent-1)")
+      .style("stroke-width", "3px")
+      ;
   }, []);
 
   return (
