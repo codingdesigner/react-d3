@@ -13,8 +13,8 @@ export default function Home() {
     setData(data.slice(-200).concat(Math.atan2(x, y)));
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Home</h1>
+    <main>
+      <h1>Line Plot</h1>
       <div onMouseMove={onMouseMove}>
         <LinePlot data={data} />
       </div>

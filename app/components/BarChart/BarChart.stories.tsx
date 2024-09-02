@@ -1,14 +1,14 @@
 // import React from 'react';
 // import type {Meta, StoryObj} from '@storybook/react';
 
-// import {LinePlot} from './LinePlot';
+// import {BarChart} from './BarChart';
 
-// const meta: Meta<typeof LinePlot> = {
-//   component: LinePlot,
+// const meta: Meta<typeof BarChart> = {
+//   component: BarChart,
 // };
 
 // export default meta;
 
-// type Story = StoryObj<typeof LinePlot>;
+// type Story = StoryObj<typeof BarChart>;
 
 // export const Basic: Story = {args: {}};

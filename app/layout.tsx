@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
 import { Menu } from "./components/Menu";
-import { Inter } from "next/font/google";
 
 import './global/global-variables.css'
 import './global/global-base.css'
 import styles from './globals.module.css'
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
