@@ -1,5 +1,5 @@
-import React from 'react';
+// import React from 'react';
 
-import {LinePlot} from '../LinePlot';
+// import {LinePlot} from '../LinePlot';
 
-describe('<LinePlot />', () => {});
+// describe('<LinePlot />', () => {});

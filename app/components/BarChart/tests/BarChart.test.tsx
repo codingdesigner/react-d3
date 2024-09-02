@@ -1,5 +1,5 @@
-import React from 'react';
+// import React from 'react';
 
-import {BarChart} from '../BarChart';
+// import {BarChart} from '../BarChart';
 
-describe('<BarChart />', () => {});
+// describe('<BarChart />', () => {});

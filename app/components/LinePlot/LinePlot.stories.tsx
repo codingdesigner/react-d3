@@ -1,14 +1,14 @@
-import React from 'react';
-import type {Meta, StoryObj} from '@storybook/react';
+// import React from 'react';
+// import type {Meta, StoryObj} from '@storybook/react';
 
-import {LinePlot} from './LinePlot';
+// import {LinePlot} from './LinePlot';
 
-const meta: Meta<typeof LinePlot> = {
-  component: LinePlot,
-};
+// const meta: Meta<typeof LinePlot> = {
+//   component: LinePlot,
+// };
 
-export default meta;
+// export default meta;
 
-type Story = StoryObj<typeof LinePlot>;
+// type Story = StoryObj<typeof LinePlot>;
 
-export const Basic: Story = {args: {}};
+// export const Basic: Story = {args: {}};
