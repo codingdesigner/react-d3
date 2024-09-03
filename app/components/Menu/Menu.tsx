@@ -8,6 +8,7 @@ export function Menu() {
       <li><a href='/'>Home</a></li>
       <li><a href='/pages/bar-chart'>Bar Chart</a></li>
       <li><a href='/pages/line-plot'>Line Plot</a></li>
+      <li><a href='/pages/pagination'>Pagination</a></li>
     </ul>
   );
 }
