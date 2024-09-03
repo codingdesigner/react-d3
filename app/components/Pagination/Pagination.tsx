@@ -6,12 +6,16 @@ import styles from './Pagination.module.css';
 export interface PageButtonProps {
   pageNumber: number,
   curPage: number,
-  onClickFunction: any,
+  onClickFunction: (page: number) => void, // Fix: Specify the type for better type safety
 }
 
 const PageButton = ({ pageNumber, curPage, onClickFunction }: PageButtonProps) => {
   const buttonStyle = (pageNumber === curPage) ? styles.ButtonCurrentPage : styles.Button;
-  return (<button className={buttonStyle} onClick={() => onClickFunction(pageNumber)}>{pageNumber}</button>)
+  return (
+    <button className={buttonStyle} onClick={() => onClickFunction(pageNumber)}>
+      {pageNumber}
+    </button>
+  );
 };
 
 export interface PaginationProps {
@@ -28,11 +32,12 @@ export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationP
     setCurPage(newPage);
   };
 
+  // account for the first and last page
   const adjustedMaxVisiblePages = maxVisiblePages - 2
 
-  // how many items on either side of curPage?
-  let leftWing;
-  let rightWing;
+  // Calculate how many items should be on either side of curPage
+  let leftWing: number;
+  let rightWing: number;
   if (adjustedMaxVisiblePages % 2 === 0) {
     if (curPage <= totalPages * 0.5) {
       leftWing = adjustedMaxVisiblePages / 2 - 1;
@@ -57,26 +62,32 @@ export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationP
     visibleEnd = totalPages;
   }
 
-  // build array of visible buttons
-  const visiblePages = [1, totalPages];
+  // Build an array of visible buttons
+  const visiblePages: number[] = [1, totalPages];
   for (let i = visibleStart; i <= visibleEnd; i++) {
-    (visiblePages.indexOf(i) === -1) && visiblePages.push(i)
+    if (!visiblePages.includes(i)) visiblePages.push(i);
   }
 
-  // write buttons to component
-  let buttons = [];
+  // Sort pages to ensure correct order
+  visiblePages.sort((a, b) => a - b);
+
+  // Generate button components
+  let buttons: JSX.Element[] = [];
   let activeElipsis = false;
   for (let i = 1; i <= totalPages; i++) {
-    // is within range of visible pages
-    if (visiblePages.indexOf(i) !== -1) {
-      buttons.push(<li className={styles.ListItem} key={i}>
+    if (visiblePages.includes(i)) {
+      buttons.push(
+        <li className={styles.ListItem} key={i}>
         <PageButton pageNumber={i} curPage={curPage} onClickFunction={onPageButtonClick} />
-      </li>)
+        </li>
+      );
       activeElipsis = false;
-    } else if (activeElipsis === false) {
-      buttons.push(<li className={styles.ListItem} key={i}>
+    } else if (!activeElipsis) {
+      buttons.push(
+        <li className={styles.ListItem} key={`ellipsis-${i}`}>
         …
-      </li>);
+        </li>
+      );
       activeElipsis = true;
     }
   }
