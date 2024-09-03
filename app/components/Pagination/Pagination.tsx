@@ -15,20 +15,22 @@ const PageButton = ({ pageNumber, curPage, onClickFunction }: PageButtonProps) =
 };
 
 export interface PaginationProps {
-  curPage?: number,
   totalPages?: number,
   maxVisiblePages?: number;
 }
 
 export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationProps) {
+  // use state to manage curPage
   const [curPage, setCurPage] = useState(10)
 
+  // button action to change current page
   const onPageButtonClick = (newPage: any) => {
     setCurPage(newPage);
   };
 
   const adjustedMaxVisiblePages = maxVisiblePages - 2
 
+  // how many items on either side of curPage?
   let leftWing;
   let rightWing;
   if (adjustedMaxVisiblePages % 2 === 0) {
@@ -44,7 +46,7 @@ export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationP
     rightWing = Math.floor(adjustedMaxVisiblePages / 2);
   }
 
-
+  // which buttons to show?
   let visibleStart = curPage - leftWing;
   let visibleEnd = curPage + rightWing;
   if (visibleStart <= 1) {
@@ -55,11 +57,13 @@ export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationP
     visibleEnd = totalPages;
   }
 
+  // build array of visible buttons
   const visiblePages = [1, totalPages];
   for (let i = visibleStart; i <= visibleEnd; i++) {
     (visiblePages.indexOf(i) === -1) && visiblePages.push(i)
   }
 
+  // write buttons to component
   let buttons = [];
   let activeElipsis = false;
   for (let i = 1; i <= totalPages; i++) {
@@ -75,7 +79,6 @@ export function Pagination({ totalPages = 14, maxVisiblePages = 5 }: PaginationP
       </li>);
       activeElipsis = true;
     }
-
   }
 
   return (
